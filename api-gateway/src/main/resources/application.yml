@@ -1,0 +1,27 @@
+server:
+  port: 9000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: cliente-persona
+          uri: http://localhost:8081
+          predicates:
+            - Path=/clientes-personas/**
+        - id: cuenta-movimiento
+          uri: http://localhost:8082
+          predicates:
+            - Path=/cuentas-movimientos/**
+        - id: reportes
+          uri: http://localhost:8083
+          predicates:
+            - Path=/reportes/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
